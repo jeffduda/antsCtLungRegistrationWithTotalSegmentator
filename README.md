@@ -2,7 +2,7 @@
 
 Register inspiration and expiration lung CT using lung segmentations from TotalSegmentator
 
-Based on [this] (https://github.com/ntustison/antsCtLungRegistrationExample) example
+Based on [this](https://github.com/ntustison/antsCtLungRegistrationExample) example
 
 # Instructions
 * Download and install [ANTs](https://github.com/stnava/ANTs).
