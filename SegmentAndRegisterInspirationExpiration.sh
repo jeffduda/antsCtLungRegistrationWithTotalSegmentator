@@ -30,11 +30,11 @@ if [ ! -e "$outputDirectory" ]; then
   mkdir -p $outputDirectory
 fi
 
-inspiration_rs="${outname}_inspiration_resampled.nii.gz"
-expiration_rs="${outname}_expiration_resampled.nii.gz"
+inspiration_rs="${outname}inspiration_resampled.nii.gz"
+expiration_rs="${outname}_xpiration_resampled.nii.gz"
 
-inspirationPre="${outname}_inspiration_preprocessed.nii.gz"
-expirationPre="${outname}_expiration_preprocessed.nii.gz"
+inspirationPre="${outname}inspiration_preprocessed.nii.gz"
+expirationPre="${outname}expiration_preprocessed.nii.gz"
 
 echo "1 Preprocessing: Start."
 if [[ ! -f "${inspirationPre}" ]] || [[ ! -f "${expirationPre}" ]]; then
@@ -62,23 +62,23 @@ if [[ ! -f "${inspirationPre}" ]] || [[ ! -f "${expirationPre}" ]]; then
 fi
 echo "1 Preprocessing: Complete."
 
-inspirationLobes="${outname}_inspiration_lobemask.nii.gz"
-expirationLobes="${outname}_expiration_lobemask.nii.gz"
+inspirationLobes="${outname}inspiration_lobemask.nii.gz"
+expirationLobes="${outname}_xpiration_lobemask.nii.gz"
 
-inspirationLungVesselsDir="${outname}_inspiration_lungvessels"
-expirationLungVesselsDir="${outname}_expiration_lungvessels"
+inspirationLungVesselsDir="${outname}inspiration_lungvessels"
+expirationLungVesselsDir="${outname}expiration_lungvessels"
 
-inspirationLungVessels="${outname}_inspiration_lungvessels_resampled.nii.gz"
-expirationLungVessels="${outname}_expiration_lungvessels_resampled.nii.gz"
+inspirationLungVessels="${outname}inspiration_lungvessels_resampled.nii.gz"
+expirationLungVessels="${outname}expiration_lungvessels_resampled.nii.gz"
 
-inspirationLobesRs="${outname}_inspiration_lobemask_resampled.nii.gz"
-expirationLobesRs="${outname}_expiration_lobemask_resampled.nii.gz"
+inspirationLobesRs="${outname}inspiration_lobemask_resampled.nii.gz"
+expirationLobesRs="${outname}expiration_lobemask_resampled.nii.gz"
 
-inspirationMask="${outname}_inspiration_lungmask_resampled.nii.gz"
-expirationMask="${outname}_expiration_lungmask_resampled.nii.gz"
+inspirationMask="${outname}inspiration_lungmask_resampled.nii.gz"
+expirationMask="${outname}expiration_lungmask_resampled.nii.gz"
 
-inspirationBinMask="${outname}_inspiration_binmask_resampled.nii.gz"
-expirationBinMask="${outname}_expiration_binmask_resampled.nii.gz"
+inspirationBinMask="${outname}inspiration_binmask_resampled.nii.gz"
+expirationBinMask="${outname}expiration_binmask_resampled.nii.gz"
 
 
 echo "2 Segmentation: Start."
@@ -248,10 +248,11 @@ if [[ ! -f "${outname}Smooth0Warp.nii.gz" ]] || [[ ! -f "${outname}Smooth0Invers
 fi
 
 # Calculate Jacobian from displacement field 
-if [[ ! -f "${outname}SmoothLogJacobian.nii.gz" ]]; then
+if [[ ! -f "${outname}smooth_log_jabocian_inspiration.nii.gz" ]]; then
 
   echo "4.3 Postprocessing: Create LogJacobian map."
-  CreateJacobianDeterminantImage 3 ${outname}Smooth0Warp.nii.gz ${outname}SmoothLogJacobian.nii.gz 1 1
+  CreateJacobianDeterminantImage 3 ${outname}Smooth0Warp.nii.gz ${outname}smooth_log_jabocian_inspiration.nii.gz 1 1
+  CreateJacobianDeterminantImage 3 ${outname}Smooth0InverseWarp.nii.gz ${outname}smooth_log_jacobian_expiration.nii.gz 1 1
 
 fi
 echo "4 Postprocessing: Complete."
@@ -262,9 +263,9 @@ echo "5 Statistics and Metrics. Complete."
 
 echo "6 Cleanup: Start"
 
-#rm -f $tmpInspirationLungMask
-#rm -f $tmpExpirationLungMask
-#rm -f ${outname}Lung*Warp.nii.gz
+rm -f $tmpInspirationLungMask
+rm -f $tmpExpirationLungMask
+rm -f ${outname}Lung*Warp.nii.gz
 #rm -f ${inspirationPre} 
 #rm -f ${expirationPre}
 
