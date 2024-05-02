@@ -202,6 +202,10 @@ if [[ ! -f "${outname}0Warp.nii.gz" ]] || [[ ! -f "${outname}0InverseWarp.nii.gz
       rm -f ${warpFieldPrefix}0Warpxvec.nii.gz
       rm -f ${warpFieldPrefix}0Warpyvec.nii.gz
       rm -f ${warpFieldPrefix}0Warpzvec.nii.gz
+      rm -f ${warpFieldPrefix}0InverseWarpxvec.nii.gz
+      rm -f ${warpFieldPrefix}0InverseWarpyvec.nii.gz
+      rm -f ${warpFieldPrefix}0InverseWarpzvec.nii.gz
+
 
     done
 
