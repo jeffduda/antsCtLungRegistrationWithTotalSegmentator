@@ -215,7 +215,7 @@ if [[ ! -f "${outname}0Warp.nii.gz" ]] || [[ ! -f "${outname}0InverseWarp.nii.gz
   echo "3.4 Registration: Merge inverese displacement fields"
   antsApplyTransforms -d 3 -v 1 \
                       -o [${outname}0InverseWarp.nii.gz,1] \
-                      -r $inspirationPre \
+                      -r $expriationPre \
                       -t ${outname}Lung10InverseWarp.nii.gz \
                       -t ${outname}Lung20InverseWarp.nii.gz
 
