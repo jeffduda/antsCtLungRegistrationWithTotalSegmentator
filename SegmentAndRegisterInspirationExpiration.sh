@@ -33,7 +33,7 @@ if [ ! -e "$outputDirectory" ]; then
 fi
 
 inspiration_rs="${outname}inspiration_resampled.nii.gz"
-expiration_rs="${outname}_xpiration_resampled.nii.gz"
+expiration_rs="${outname}expiration_resampled.nii.gz"
 
 inspirationPre="${outname}inspiration_preprocessed.nii.gz"
 expirationPre="${outname}expiration_preprocessed.nii.gz"
@@ -65,7 +65,7 @@ fi
 echo "1 Preprocessing: Complete."
 
 inspirationLobes="${outname}inspiration_lobemask.nii.gz"
-expirationLobes="${outname}_xpiration_lobemask.nii.gz"
+expirationLobes="${outname}expiration_lobemask.nii.gz"
 
 inspirationLungVesselsDir="${outname}inspiration_lungvessels"
 expirationLungVesselsDir="${outname}expiration_lungvessels"
@@ -266,13 +266,13 @@ if [[ ! -f "${outname}smooth_log_jabocian_inspiration.nii.gz" ]]; then
                     -i ${expiration} \
                     -r ${inspiration} \
                     -t ${outname}Smooth0Warp.nii.gz \
-                    -o ${outname}_expiration_warped.nii.gz 
+                    -o ${outname}expiration_warped.nii.gz 
 
   antsApplyTransforms -d 3 -v 1 \
                     -i ${inspiration} \
                     -r ${expiration} \
                     -t ${outname}Smooth0InverseWarp.nii.gz \
-                    -o ${outname}_inspiration_warped.nii.gz 
+                    -o ${outname}inspiration_warped.nii.gz 
 fi
 echo "4 Postprocessing: Complete."
 
