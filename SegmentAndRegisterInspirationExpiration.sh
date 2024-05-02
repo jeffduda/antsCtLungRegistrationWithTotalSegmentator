@@ -2,6 +2,8 @@
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=4
 #module load ANTs
 
+t1=`date +%s`
+
 usage() { echo "Usage: $0 -i inspiration_ct -e expiration_ct -o output_prefix"; exit 1; }
 
 inspiration=""
@@ -271,4 +273,6 @@ rm -f ${outname}Lung*Warp.nii.gz
 
 echo "6 Cleanup: Complete."
 
-
+t2=`date +%s`
+tm=$(( $t2 - $t1 ))
+echo "Run time: $tm seconds"
