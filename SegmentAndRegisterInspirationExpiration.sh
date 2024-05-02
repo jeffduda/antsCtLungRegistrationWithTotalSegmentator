@@ -124,6 +124,9 @@ if [[ ! -f "${inspirationMask}" ]] || [[ ! -f "${expirationMask}" ]]; then
   ImageMath 3 ${inspirationLungVessels} m ${inspirationLungVesselsDir}/lung_vessels.nii.gz ${inspirationBinMask}
   ImageMath 3 ${expirationLungVessels} m ${expirationLungVesselsDir}/lung_vessels.nii.gz ${expirationBinMask}
 
+  rm -Rf ${inspirationLungVesselsDir}
+  rm -Rf ${expirationLungVesselsDir}
+
 fi
 echo "2 Segmentation: Complete."
 
