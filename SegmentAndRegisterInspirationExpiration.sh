@@ -256,6 +256,19 @@ if [[ ! -f "${outname}smooth_log_jabocian_inspiration.nii.gz" ]]; then
   CreateJacobianDeterminantImage 3 ${outname}Smooth0Warp.nii.gz ${outname}smooth_log_jabocian_inspiration.nii.gz 1 1
   CreateJacobianDeterminantImage 3 ${outname}Smooth0InverseWarp.nii.gz ${outname}smooth_log_jacobian_expiration.nii.gz 1 1
 
+  # Apply warps for visual QC, figure generation, etc.
+  echo "4.4 Postprocessing: Apply displacment fields."
+  antsApplyTransforms -d 3 -v 1 \
+                    -i ${expiration} \
+                    -r ${inspiration} \
+                    -t ${outname}Smooth0Warp.nii.gz \
+                    -o ${outname}_expiration_warped.nii.gz 
+
+  antsApplyTransforms -d 3 -v 1 \
+                    -i ${inspiration} \
+                    -r ${expiration} \
+                    -t ${outname}Smooth0InverseWarp.nii.gz \
+                    -o ${outname}_inspiration_warped.nii.gz 
 fi
 echo "4 Postprocessing: Complete."
 
