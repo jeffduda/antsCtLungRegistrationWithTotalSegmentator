@@ -9,7 +9,7 @@ usage() { echo "Usage: $0 -i inspiration_ct -e expiration_ct -o output_prefix"; 
 inspiration=""
 expiration=""
 outname=""
-res="2"
+res=2
 ts_fast=""
 
 while getopts e:fi:o:hr: flag
@@ -41,10 +41,16 @@ expirationPre="${outname}expiration_preprocessed.nii.gz"
 echo "1 Preprocessing: Start."
 if [[ ! -f "${inspirationPre}" ]] || [[ ! -f "${expirationPre}" ]]; then
 
-  echo "1.1 Preprocessing: Resample CT images."
-
-  ResampleImageBySpacing 3 ${inspiration} ${inspiration_rs} ${res} ${res} ${res}
-  ResampleImageBySpacing 3 ${expiration} ${expiration_rs} ${res} ${res} ${res}
+  # Optional resampling
+  if [ $res -gt 0 ]; then
+    echo "1.1 Preprocessing: Resample CT images."
+    ResampleImageBySpacing 3 ${inspiration} ${inspiration_rs} ${res} ${res} ${res}
+    ResampleImageBySpacing 3 ${expiration} ${expiration_rs} ${res} ${res} ${res}
+  else 
+    echo "1.1 Preprocessing: Retain original input spacing"
+    inspiration_rs="${inspiration}"
+    expiration_rs="${expiration}"
+  fi
 
   echo "1.2 Preprocessing: Rescale intensities."
 
